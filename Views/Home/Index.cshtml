@@ -1,0 +1,43 @@
+﻿<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+@using Multi_Page_WebApp_Contacts.Models
+@{
+    ViewData["Title"] = "Contact Page";
+}
+
+<div class="mb-2">
+    <!--Specifying the controller to use "Contact"-->
+    <a asp-controller="Contact" asp-action="Add" class="btn btn-primary">Add New Contact</a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <!--Adding table rows related to each model attribute/property.-->
+        <tr>
+            <th>Name</th>
+            <th>PhoneNumber</th>
+            <th>Address</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Looping through the objects within the Model to display.-->
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.Name</td>
+                <td>@contact.PhoneNumber</td>
+                <td>@contact.Address</td>
+                <td>@contact.Note</td>
+                <td>
+                    <!--Creating edit and delete options for all objects within the model.-->
+                    <a asp-controller="Contact" asp-action="Edit"
+                       asp-route-id="@contact.ContactId"
+                       class="btn btn-warning">Edit</a>
+
+                    <a asp-controller="Contact" asp-action="Delete"
+                       asp-route-id="@contact.ContactId"
+                       class="btn btn-warning">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

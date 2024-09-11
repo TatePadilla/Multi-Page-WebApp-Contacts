@@ -1,0 +1,43 @@
+﻿<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+@using Multi_Page_WebApp_Contacts.Models
+@model Contact
+@{
+    // ViewBag.Action auto fills what action is being used, ex: "Edit/Add Contact".
+    string title = ViewBag.Action + " Contact";
+    ViewData["Title"] = title;
+}
+<!--The ViewBag properties allows the view to work for both Add() and Edit() actions.-->
+<h2>@ViewBag.Title</h2>
+<!--Creating the post (Edit) command form.-->
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label">Address</label>
+        <input asp-for="Address" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Note" class="form-label">Note</label>
+        <input asp-for="Note" class="form-control">
+    </div>
+
+    <!--Bound to hidden field so users can't change it.-->
+    <input type="hidden" asp-for="ContactId" />
+
+    <!--The submit button posts the form to the Edit() action of the current controller (ContactController)-->
+    <button type="submit" class="btn btn-primary">Save</button>
+
+    <!--Tag helpers are used to request the Index() action of the Home controller.-->
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
